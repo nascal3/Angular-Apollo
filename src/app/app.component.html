@@ -1,3 +1,24 @@
-<ul>
-  <li *ngFor="let post of posts$ | async"> {{ post.title }}</li>
-</ul>
+<main>
+
+  <form [formGroup]="newPostForm">
+    <mat-form-field class="form-field">
+      <input matInput formControlName="title" type="text" placeholder="Enter title">
+    </mat-form-field>
+    <mat-form-field class="form-field">
+      <textarea matInput formControlName="body" placeholder="Enter your text...."></textarea>
+    </mat-form-field>
+    <button mat-stroked-button [disabled]="!newPostForm.valid" (click)="onAddTask()">Submit</button>
+  </form>
+
+  <h1>Tasks:</h1>
+  <section class="list">
+    <mat-card class="card" *ngFor="let post of posts$ | async">
+      <mat-card-header>
+        <mat-card-title>{{post.title}}</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <p>{{ post.body }}</p>
+      </mat-card-content>
+    </mat-card>
+  </section>
+</main>
